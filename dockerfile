@@ -8,7 +8,7 @@ COPY package*.json ./
 
 RUN npm ci 
 
-RUN chmod +x ./node_modules/.bin/ts-node
+RUN chmod -R 755 /app/node_modules/.bin
 
 COPY . .
 
