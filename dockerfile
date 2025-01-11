@@ -8,6 +8,8 @@ COPY package*.json ./
 
 RUN npm ci 
 
+RUN chmod +x ./node_modules/.bin/ts-node
+
 COPY . .
 
 EXPOSE $PORT
