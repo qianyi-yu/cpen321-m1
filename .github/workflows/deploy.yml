@@ -27,13 +27,13 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
-        script: 
+        script: |
           cd /home/ubuntu/cpen321-m1
 
           # Write secrets into .env
           cat > .env <<EOF
-          PORT= ${{ secrets.PROD_PORT }}
-          DB_URI= ${{ secrets.PROD_DB_URI }}
+          PORT=${{ secrets.PROD_PORT }}
+          DB_URI=${{ secrets.PROD_DB_URI }}
           EOF
 
           # Give .env permissions
@@ -42,13 +42,4 @@ jobs:
           # Build and run container
           docker-compose down
           docker-compose --env-file .env build
-          docker-compose --env-file .env up  -d
-
-
-
-
-
-
-
-
-
+          docker-compose --env-file .env up -d
