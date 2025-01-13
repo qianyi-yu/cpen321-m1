@@ -20,6 +20,7 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         source: "."
         target: "/home/ubuntu/cpen321-m1"
+        debug: true
 
      - name: Rebuild and Deploy
        uses: appleboy/ssh-action@master
