@@ -29,6 +29,8 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         script: |
           cd /home/ubuntu/cpen321-m1
+          sudo rm -rf node_modules
+          npm install
 
           # Write secrets into .env
           cat > .env <<EOF

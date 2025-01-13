@@ -8,8 +8,6 @@ COPY package*.json ./
 
 RUN npm ci 
 
-RUN chmod -R 755 /app/node_modules/.bin
-
 COPY . .
 
 EXPOSE $PORT
