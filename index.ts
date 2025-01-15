@@ -3,6 +3,7 @@ import { MongoClient } from 'mongodb';
 import { client } from './services';
 import { validationResult } from 'express-validator';
 import { TodoRoutes } from './routes/TodoRoutes';
+import { ServerInfoRoutes } from './routes/ServerInfoRoutes';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
@@ -14,10 +15,10 @@ app.use(express.json()) // run before get request, process body of function in j
 app.use(morgan('tiny'))
 // if have multiple Routes
 // const OtherRoutes = []
-// const Routes = [...TodoRoutes, ...OtherRoutes]
+const Routes = [...TodoRoutes, ...ServerInfoRoutes]
 
 // change to Routes.forEach
-TodoRoutes.forEach((route) => {
+Routes.forEach((route) => {
     (app as any)[route.method] (
         route.route,
         route.validation,
