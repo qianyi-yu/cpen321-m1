@@ -77,7 +77,8 @@ dotenv.config();
 // Read your self-signed certificate and private key
 const options = {
     key: fs.readFileSync('/etc/ssl/certs/myserver-key.pem'),
-    cert: fs.readFileSync('/etc/ssl/certs/myserver-cert.pem')
+    cert: fs.readFileSync('/etc/ssl/certs/myserver-cert.pem'),
+    passphrase: 'yuqianyi1409'
 };
 
 const app = express();
