@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { format } from 'date-fns-tz'; 
 import { client } from '../services';
 import { ObjectId } from 'mongodb';
 import os from 'os';
@@ -15,16 +14,26 @@ export class ServerInfoController {
         }
     };
 
-    async getServerTime(req: Request, res: Response, nextFunction: NextFunction) {
+    async getServerTime(req: Request, res: Response, next: NextFunction) {
         try {
             const now = new Date();
-            const serverTime = format(now, "HH:mm:ss 'GMT'XXX", { timeZone: "GMT" }); // Formats in the required GMT+hh:ss format
+    
+            // Format time in the desired format: hh:mm:ss GMT+hh:ss
+            const timeZoneOffset = now.getTimezoneOffset(); // Offset in minutes
+            const offsetHours = Math.abs(Math.floor(timeZoneOffset / 60));
+            const offsetMinutes = Math.abs(timeZoneOffset % 60);
+            const offsetSign = timeZoneOffset > 0 ? "-" : "+";
+    
+            const gmtOffset = `GMT${offsetSign}${String(offsetHours).padStart(2, "0")}:${String(offsetMinutes).padStart(2, "0")}`;
+            const formattedTime = now.toISOString().split("T")[1].split(".")[0]; // Extract hh:mm:ss
+    
+            const serverTime = `${formattedTime} ${gmtOffset}`;
             res.status(200).send({ serverTime });
-        } catch (err) {
-            console.error("Error getting server time: ", err)
-            res.status(500);
+        } catch (error) {
+            console.error("Error fetching server time", error);
+            res.sendStatus(500);
         }
-    };
+    }
 
     async getUserName(req: Request, res: Response, nextFunction: NextFunction) {
         try {
