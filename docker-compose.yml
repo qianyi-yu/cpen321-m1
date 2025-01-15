@@ -22,6 +22,8 @@ services:
       - PORT=${PORT}
     ports:
      - "${PORT}:${PORT}"
+    volumes: 
+      - /etc/ssl/certs:/etc/ssl/certs:ro
     depends_on:
       - mongo
     command: npm run start

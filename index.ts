@@ -82,13 +82,11 @@ const options = {
 
 const app = express();
 
-app.use(express.json()) // Process body of function in JSON
+app.use(express.json()) 
 app.use(morgan('tiny'));
 
-// Combine all routes, including your Todo and ServerInfo routes
 const Routes = [...TodoRoutes, ...ServerInfoRoutes];
 
-// Apply routes to the app
 Routes.forEach((route) => {
     (app as any)[route.method](
         route.route,
