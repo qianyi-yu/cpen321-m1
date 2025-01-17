@@ -22,12 +22,4 @@ export const ServerInfoRoutes = [
         action: controller.getUserName,
         validation: []
     },
-    // {
-    //     method: "delete",
-    //     route: "/todolist/:id",
-    //     action: controller.deleteTodos,
-    //     validation: [
-    //         param("id").isMongoId(),
-    //     ]
-    // }
 ]
